@@ -281,90 +281,92 @@ main {
 .latest-books-section {
   padding: 20px;
   background-color: #ffffff;
-  
 }
+
 .latest-books-header {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
 }
+
 .latest-books-title {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
-  color: #000000;
-  margin-bottom: 10px;
 }
+
 .view-all-link {
-  text-decoration: none;
   color: #006f51;
-  font-weight: bold;
-  font-size: 14px;
+  text-decoration: none;
 }
+
+.books-scroll-container {
+  position: relative;
+}
+
 .books-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 15px;
-}
-.book-item {
   display: flex;
-  flex-direction: column;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
+
+.books-container::-webkit-scrollbar { /* WebKit */
+  width: 0;
+  height: 0;
+}
+
+.book-item {
+  flex: 0 0 auto;
+  width: 25%; /* Show 4 books at a time */
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
 .book-cover {
   width: 100%;
-  aspect-ratio: 2 / 3;
+  height: auto;
   object-fit: cover;
-  margin-bottom: 10px;
 }
+
 .book-title {
-  font-size: 14px;
-  font-weight: bold;
-  margin: 0;
-  line-height: 1.2;
+  font-size: 16px;
+  margin: 10px 0 5px;
 }
+
 .book-author {
-  font-size: 12px;
+  font-size: 14px;
   color: #666;
-  margin: 5px 0 0;
 }
 
-@media (min-width: 480px) {
-  .latest-books-title {
-    font-size: 22px;
-  }
-  .books-container {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  }
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1;
 }
 
-@media (min-width: 768px) {
-  .latest-books-header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .latest-books-title {
-    font-size: 24px;
-    margin-bottom: 0;
-  }
-  .view-all-link {
-    font-size: 16px;
-  }
-  .books-container {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 20px;
-  }
-  .book-title {
-    font-size: 16px;
-  }
-  .book-author {
-    font-size: 14px;
-  }
+.scroll-left {
+  left: 10px;
 }
 
-@media (min-width: 1024px) {
-  .books-container {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+.scroll-right {
+  right: 10px;
+}
+
+@media (max-width: 768px) {
+  .book-item {
+    width: 50%; /* Show 2 books on smaller screens */
   }
 }
 

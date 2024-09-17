@@ -23,16 +23,36 @@ document.querySelectorAll('.news-category').forEach(link => {
 });
 
 // Latest Books Carousel
-let currentBookIndex = 0;
-const books = document.querySelectorAll('.book-item');
-
-function showNextBook() {
-    books[currentBookIndex].style.display = 'none';
-    currentBookIndex = (currentBookIndex + 1) % books.length;
-    books[currentBookIndex].style.display = 'block';
-}
-
-setInterval(showNextBook, 5000); // Change book every 5 seconds
+document.addEventListener('DOMContentLoaded', () => {
+    const booksContainer = document.querySelector('.books-container');
+    const scrollLeftBtn = document.querySelector('.scroll-left');
+    const scrollRightBtn = document.querySelector('.scroll-right');
+  
+    const scrollAmount = booksContainer.offsetWidth / 2; // Scroll by half the container width
+  
+    scrollLeftBtn.addEventListener('click', () => {
+      booksContainer.scrollBy({
+        left: -scrollAmount,
+        behavior: 'smooth'
+      });
+    });
+  
+    scrollRightBtn.addEventListener('click', () => {
+      booksContainer.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    });
+  
+    // Optional: Hide scroll buttons when at the start or end of the container
+    booksContainer.addEventListener('scroll', () => {
+      const isAtStart = booksContainer.scrollLeft === 0;
+      const isAtEnd = booksContainer.scrollLeft + booksContainer.offsetWidth >= booksContainer.scrollWidth;
+  
+      scrollLeftBtn.style.display = isAtStart ? 'none' : 'flex';
+      scrollRightBtn.style.display = isAtEnd ? 'none' : 'flex';
+    });
+  });
 
 // Partners Scroll
 document.querySelector(".scroll-left").addEventListener("click", () => {
